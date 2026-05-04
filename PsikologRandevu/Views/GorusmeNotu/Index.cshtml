@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PsikologRandevu.Models.GorusmeNotu>
+
+<h2>Görüşme Notları</h2>
+<a href="/GorusmeNotu/Create">Yeni Not Ekle</a>
+<table border="1">
+    <tr>
+        <th>Not</th>
+        <th>Tarih</th>
+        <th>İşlem</th>
+    </tr>
+    @foreach (var not in Model)
+    {
+        <tr>
+            <td>@not.Not</td>
+            <td>@not.Tarih.ToShortDateString()</td>
+            <td><a href="/GorusmeNotu/Delete/@not.Id">Sil</a></td>
+        </tr>
+    }
+</table>

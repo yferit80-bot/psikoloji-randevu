@@ -1,0 +1,20 @@
+﻿@*@model PsikologRandevu.Models.Kullanici
+
+<h2>Yeni Kullanıcı Ekle</h2>
+<form method="post" action="/Kullanici/Create">
+    <label>Ad:</label>
+    <input type="text" name="Ad" /><br />
+    <label>Soyad:</label>
+    <input type="text" name="Soyad" /><br />
+    <label>Email:</label>
+    <input type="email" name="Email" /><br />
+    <label>Şifre:</label>
+    <input type="password" name="Sifre" /><br />
+    <label>Rol:</label>
+    <select name="Rol">
+        <option>Hasta</option>
+        <option>Psikolog</option>
+        <option>Admin</option>
+    </select><br />
+    <button type="submit">Kaydet</button>
+</form>

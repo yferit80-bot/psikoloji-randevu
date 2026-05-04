@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PsikologRandevu.Models.Kullanici>
+
+<h2>Kullanıcılar</h2>
+<a href="/Kullanici/Create">Yeni Kullanıcı Ekle</a>
+<table border="1">
+    <tr>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>İşlem</th>
+    </tr>
+    @foreach (var kullanici in Model)
+    {
+        <tr>
+            <td>@kullanici.Ad</td>
+            <td>@kullanici.Soyad</td>
+            <td>@kullanici.Email</td>
+            <td>@kullanici.Rol</td>
+            <td><a href="/Kullanici/Delete/@kullanici.Id">Sil</a></td>
+        </tr>
+    }
+</table>

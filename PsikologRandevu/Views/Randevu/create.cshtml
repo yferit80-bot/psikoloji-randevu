@@ -1,0 +1,14 @@
+﻿@model PsikologRandevu.Models.Randevu
+
+<h2>Yeni Randevu Ekle</h2>
+<form method="post" action="/Randevu/Create">
+    <label>Hasta ID:</label>
+    <input type="number" name="HastaId" /><br />
+    <label>Psikolog ID:</label>
+    <input type="number" name="PsikologId" /><br />
+    <label>Tarih:</label>
+    <input type="date" name="Tarih" /><br />
+    <label>Saat:</label>
+    <input type="time" name="Saat" /><br />
+    <button type="submit">Kaydet</button>
+</form>

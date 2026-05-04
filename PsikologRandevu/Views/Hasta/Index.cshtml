@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PsikologRandevu.Models.Hasta>
+
+<h2>Hastalar</h2>
+<a href="/Hasta/Create">Yeni Hasta Ekle</a>
+<table border="1">
+    <tr>
+        <th>Telefon</th>
+        <th>Doğum Tarihi</th>
+        <th>İşlem</th>
+    </tr>
+    @foreach (var hasta in Model)
+    {
+        <tr>
+            <td>@hasta.Telefon</td>
+            <td>@hasta.DogumTarihi.ToShortDateString()</td>
+            <td><a href="/Hasta/Delete/@hasta.Id">Sil</a></td>
+        </tr>
+    }
+</table>

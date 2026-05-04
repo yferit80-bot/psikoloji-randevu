@@ -1,0 +1,12 @@
+﻿@model PsikologRandevu.Models.Psikolog
+
+<h2>Yeni Psikolog Ekle</h2>
+<form method="post" action="/Psikolog/Create">
+    <label>Uzmanlık:</label>
+    <input type="text" name="Uzmanlik" /><br />
+    <label>Biyografi:</label>
+    <textarea name="Biyografi"></textarea><br />
+    <label>Seans Ücreti:</label>
+    <input type="number" name="SeansUcreti" /><br />
+    <button type="submit">Kaydet</button>
+</form>

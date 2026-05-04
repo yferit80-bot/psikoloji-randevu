@@ -1,0 +1,12 @@
+﻿@model PsikologRandevu.Models.GorusmeNotu
+
+<h2>Yeni Görüşme Notu Ekle</h2>
+<form method="post" action="/GorusmeNotu/Create">
+    <label>Randevu ID:</label>
+    <input type="number" name="RandevuId" /><br />
+    <label>Psikolog ID:</label>
+    <input type="number" name="PsikologId" /><br />
+    <label>Not:</label>
+    <textarea name="Not"></textarea><br />
+    <button type="submit">Kaydet</button>
+</form>

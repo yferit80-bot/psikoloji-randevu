@@ -1,0 +1,25 @@
+﻿@model IEnumerable<PsikologRandevu.Models.Randevu>
+
+<h2>Randevular</h2>
+<a href="/Randevu/Create">Yeni Randevu Ekle</a>
+<table border="1">
+    <tr>
+        <th>Tarih</th>
+        <th>Saat</th>
+        <th>Durum</th>
+        <th>İşlem</th>
+    </tr>
+    @foreach (var randevu in Model)
+    {
+        <tr>
+            <td>@randevu.Tarih.ToShortDateString()</td>
+            <td>@randevu.Saat</td>
+            <td>@randevu.Durum</td>
+            <td>
+                <a href="/Randevu/Onayla/@randevu.Id">Onayla</a> |
+                <a href="/Randevu/Iptal/@randevu.Id">İptal</a> |
+                <a href="/Randevu/Delete/@randevu.Id">Sil</a>
+            </td>
+        </tr>
+    }
+</table>

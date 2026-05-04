@@ -1,0 +1,21 @@
+﻿@model IEnumerable<PsikologRandevu.Models.Psikolog>
+
+<h2>Psikologlar</h2>
+<a href="/Psikolog/Create">Yeni Psikolog Ekle</a>
+<table border="1">
+    <tr>
+        <th>Uzmanlık</th>
+        <th>Biyografi</th>
+        <th>Seans Ücreti</th>
+        <th>İşlem</th>
+    </tr>
+    @foreach (var psikolog in Model)
+    {
+        <tr>
+            <td>@psikolog.Uzmanlik</td>
+            <td>@psikolog.Biyografi</td>
+            <td>@psikolog.SeansUcreti</td>
+            <td><a href="/Psikolog/Delete/@psikolog.Id">Sil</a></td>
+        </tr>
+    }
+</table>
