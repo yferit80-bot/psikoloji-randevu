@@ -423,6 +423,8 @@ FodyWeavers.xsd
 
 # Windows Installer files from build outputs
 *.cab
+# Hassas ayar dosyası
+appsettings.json
 *.msi
 *.msix
 *.msm
