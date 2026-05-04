@@ -56,5 +56,5 @@ erDiagram
 
 - ASP.NET Core MVC
 - Entity Framework Core
-- SQLite
+- SQL Server (SSMS)
 - Bootstrap
