@@ -1,87 +1,83 @@
 ﻿@{
     ViewData["Title"] = "Ana Sayfa";
+    var rol = Context.Session.GetString("Rol");
 }
 
-<div class="page-header">
-    <h2><i class="fas fa-brain me-2"></i>Psikoloji Randevu Sistemi</h2>
-    <p class="mb-0">Hoş geldiniz! Sistemi yukarıdaki menüden yönetebilirsiniz.</p>
-</div>
+@if (rol == null)
+{
+    Context.Response.Redirect("/Giris/Index");
+    return;
+}
 
-<div class="row g-4 mb-4">
-    <div class="col-md-3">
-        <div class="stat-card blue">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="mb-1 opacity-75">Kullanıcılar</p>
-                    <h3>Yönet</h3>
-                </div>
-                <i class="fas fa-users"></i>
-            </div>
-            <a href="/Kullanici" class="btn btn-light btn-sm mt-3 w-100">Görüntüle</a>
-        </div>
+@if (rol == "Hasta")
+{
+    <div class="page-header">
+        <h2><i class="fas fa-heart me-2"></i>Hasta Paneli</h2>
+        <p class="mb-0">Hoş geldiniz! Psikolog seçin ve randevu oluşturun.</p>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card teal">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="mb-1 opacity-75">Psikologlar</p>
-                    <h3>Yönet</h3>
-                </div>
-                <i class="fas fa-user-md"></i>
-            </div>
-            <a href="/Psikolog" class="btn btn-light btn-sm mt-3 w-100">Görüntüle</a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stat-card purple">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="mb-1 opacity-75">Hastalar</p>
-                    <h3>Yönet</h3>
-                </div>
-                <i class="fas fa-heart"></i>
-            </div>
-            <a href="/Hasta" class="btn btn-light btn-sm mt-3 w-100">Görüntüle</a>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stat-card gray">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="mb-1 opacity-75">Randevular</p>
-                    <h3>Yönet</h3>
-                </div>
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-            <a href="/Randevu" class="btn btn-light btn-sm mt-3 w-100">Görüntüle</a>
-        </div>
-    </div>
-</div>
 
-<div class="row g-4">
-    <div class="col-md-6">
-        <div class="card p-4">
-            <h5 class="mb-3"><i class="fas fa-bolt me-2 text-primary"></i>Hızlı İşlemler</h5>
-            <div class="d-grid gap-2">
-                <a href="/Kullanici/Create" class="btn btn-outline-primary"><i class="fas fa-user-plus me-2"></i>Yeni Kullanıcı Ekle</a>
-                <a href="/Psikolog/Create" class="btn btn-outline-success"><i class="fas fa-user-md me-2"></i>Yeni Psikolog Ekle</a>
-                <a href="/Hasta/Create" class="btn btn-outline-info"><i class="fas fa-heart me-2"></i>Yeni Hasta Ekle</a>
-                <a href="/Randevu/Create" class="btn btn-outline-warning"><i class="fas fa-calendar-plus me-2"></i>Yeni Randevu Oluştur</a>
-                <a href="/GorusmeNotu/Create" class="btn btn-outline-secondary"><i class="fas fa-notes-medical me-2"></i>Görüşme Notu Ekle</a>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-user-md text-primary mb-3" style="font-size:2.5rem"></i>
+                <h5>Psikologlar</h5>
+                <p class="text-muted">Psikologları görüntüle</p>
+                <a href="/Psikolog" class="btn btn-primary">Görüntüle</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-calendar-plus text-success mb-3" style="font-size:2.5rem"></i>
+                <h5>Randevu Oluştur</h5>
+                <p class="text-muted">Yeni randevu al</p>
+                <a href="/Randevu/Create" class="btn btn-success">Randevu Al</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-notes-medical text-info mb-3" style="font-size:2.5rem"></i>
+                <h5>Görüşme Notu Ekle</h5>
+                <p class="text-muted">Görüşme notu ekle</p>
+                <a href="/GorusmeNotu/Create" class="btn btn-info text-white">Not Ekle</a>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card p-4">
-            <h5 class="mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Sistem Hakkında</h5>
-            <p class="text-muted">Bu sistem psikoloji kliniklerinde randevu ve hasta yönetimini kolaylaştırmak için geliştirilmiştir.</p>
-            <ul class="list-unstyled">
-                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Kullanıcı yönetimi</li>
-                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Psikolog profil yönetimi</li>
-                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Hasta takibi</li>
-                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Randevu planlama</li>
-                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Görüşme notları</li>
-            </ul>
+}
+else if (rol == "Doktor")
+{
+    <div class="page-header">
+        <h2><i class="fas fa-user-md me-2"></i>Doktor Paneli</h2>
+        <p class="mb-0">Hoş geldiniz! Hastalarınızı yönetin.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-users text-primary mb-3" style="font-size:2.5rem"></i>
+                <h5>Hastalar</h5>
+                <p class="text-muted">Hastaları görüntüle</p>
+                <a href="/Hasta" class="btn btn-primary">Görüntüle</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-user-plus text-success mb-3" style="font-size:2.5rem"></i>
+                <h5>Yeni Hasta Ekle</h5>
+                <p class="text-muted">Sisteme yeni hasta ekle</p>
+                <a href="/Hasta/Create" class="btn btn-success">Hasta Ekle</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <i class="fas fa-notes-medical text-warning mb-3" style="font-size:2.5rem"></i>
+                <h5>Görüşme Notları</h5>
+                <p class="text-muted">Notları görüntüle</p>
+                <a href="/GorusmeNotu" class="btn btn-warning text-white">Notları Gör</a>
+            </div>
         </div>
     </div>
+}
+
+<div class="mt-4 text-end">
+    <a href="/Giris/Cikis" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap</a>
 </div>

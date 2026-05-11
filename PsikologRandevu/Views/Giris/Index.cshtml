@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Giriş";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Psikoloji Randevu - Giriş</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #3a7bd5, #6ea8fe);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .giris-kart {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        .giris-btn {
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .btn-hasta {
+            background: linear-gradient(135deg, #3a7bd5, #6ea8fe);
+            color: white;
+        }
+        .btn-hasta:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-doktor {
+            background: linear-gradient(135deg, #0f9b8e, #43c6ac);
+            color: white;
+        }
+        .btn-doktor:hover { opacity: 0.9; transform: translateY(-2px); }
+        .logo { color: #3a7bd5; font-size: 3rem; }
+    </style>
+</head>
+<body>
+    <div class="giris-kart text-center">
+        <i class="fas fa-brain logo mb-3"></i>
+        <h2 class="fw-bold mb-1">Psikoloji Randevu</h2>
+        <p class="text-muted mb-4">Lütfen giriş türünü seçin</p>
+
+        <div class="d-grid gap-3">
+            <form method="post" action="/Giris/HastaGiris">
+                <button type="submit" class="giris-btn btn-hasta">
+                    <i class="fas fa-heart me-2"></i>Hasta Girişi
+                </button>
+            </form>
+            <form method="post" action="/Giris/DoktorGiris">
+                <button type="submit" class="giris-btn btn-doktor">
+                    <i class="fas fa-user-md me-2"></i>Doktor Girişi
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
