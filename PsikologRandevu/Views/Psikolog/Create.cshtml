@@ -1,12 +1,32 @@
 ﻿@model PsikologRandevu.Models.Psikolog
+@{
+    ViewData["Title"] = "Yeni Psikolog";
+}
 
-<h2>Yeni Psikolog Ekle</h2>
-<form method="post" action="/Psikolog/Create">
-    <label>Uzmanlık:</label>
-    <input type="text" name="Uzmanlik" /><br />
-    <label>Biyografi:</label>
-    <textarea name="Biyografi"></textarea><br />
-    <label>Seans Ücreti:</label>
-    <input type="number" name="SeansUcreti" /><br />
-    <button type="submit">Kaydet</button>
-</form>
+<div class="page-header">
+    <h2><i class="fas fa-user-md me-2"></i>Yeni Psikolog Ekle</h2>
+    <p class="mb-0">Aşağıdaki formu doldurarak yeni psikolog ekleyebilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <form method="post" action="/Psikolog/Create">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Uzmanlık</label>
+                <input type="text" name="Uzmanlik" class="form-control" placeholder="Uzmanlık alanı girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Seans Ücreti (₺)</label>
+                <input type="number" name="SeansUcreti" class="form-control" placeholder="Ücret girin" />
+            </div>
+            <div class="col-12">
+                <label class="form-label">Biyografi</label>
+                <textarea name="Biyografi" class="form-control" rows="4" placeholder="Biyografi girin"></textarea>
+            </div>
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Kaydet</button>
+                <a href="/Psikolog" class="btn btn-outline-secondary ms-2">Geri Dön</a>
+            </div>
+        </div>
+    </form>
+</div>

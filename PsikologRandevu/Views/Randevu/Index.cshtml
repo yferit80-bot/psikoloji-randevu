@@ -1,25 +1,54 @@
 ﻿@model IEnumerable<PsikologRandevu.Models.Randevu>
+@{
+    ViewData["Title"] = "Randevular";
+}
 
-<h2>Randevular</h2>
-<a href="/Randevu/Create">Yeni Randevu Ekle</a>
-<table border="1">
-    <tr>
-        <th>Tarih</th>
-        <th>Saat</th>
-        <th>Durum</th>
-        <th>İşlem</th>
-    </tr>
-    @foreach (var randevu in Model)
-    {
-        <tr>
-            <td>@randevu.Tarih.ToShortDateString()</td>
-            <td>@randevu.Saat</td>
-            <td>@randevu.Durum</td>
-            <td>
-                <a href="/Randevu/Onayla/@randevu.Id">Onayla</a> |
-                <a href="/Randevu/Iptal/@randevu.Id">İptal</a> |
-                <a href="/Randevu/Delete/@randevu.Id">Sil</a>
-            </td>
-        </tr>
-    }
-</table>
+<div class="page-header">
+    <h2><i class="fas fa-calendar-alt me-2"></i>Randevular</h2>
+    <p class="mb-0">Sistemdeki tüm randevuları buradan yönetebilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Randevu Listesi</h5>
+        <a href="/Randevu/Create" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Yeni Randevu</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Saat</th>
+                <th>Durum</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var randevu in Model)
+            {
+                <tr>
+                    <td><i class="fas fa-calendar me-2 text-muted"></i>@randevu.Tarih.ToShortDateString()</td>
+                    <td><i class="fas fa-clock me-2 text-muted"></i>@randevu.Saat</td>
+                    <td>
+                        @if (randevu.Durum == "Onaylandi")
+                        {
+                            <span class="badge bg-success">Onaylandı</span>
+                        }
+                        else if (randevu.Durum == "Iptal")
+                        {
+                            <span class="badge bg-danger">İptal</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Bekliyor</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/Randevu/Onayla/@randevu.Id" class="btn btn-sm btn-success"><i class="fas fa-check"></i></a>
+                        <a href="/Randevu/Iptal/@randevu.Id" class="btn btn-sm btn-warning"><i class="fas fa-times"></i></a>
+                        <a href="/Randevu/Delete/@randevu.Id" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

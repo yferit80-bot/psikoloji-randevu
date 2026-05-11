@@ -1,14 +1,36 @@
 ﻿@model PsikologRandevu.Models.Randevu
+@{
+    ViewData["Title"] = "Yeni Randevu";
+}
 
-<h2>Yeni Randevu Ekle</h2>
-<form method="post" action="/Randevu/Create">
-    <label>Hasta ID:</label>
-    <input type="number" name="HastaId" /><br />
-    <label>Psikolog ID:</label>
-    <input type="number" name="PsikologId" /><br />
-    <label>Tarih:</label>
-    <input type="date" name="Tarih" /><br />
-    <label>Saat:</label>
-    <input type="time" name="Saat" /><br />
-    <button type="submit">Kaydet</button>
-</form>
+<div class="page-header">
+    <h2><i class="fas fa-calendar-plus me-2"></i>Yeni Randevu Oluştur</h2>
+    <p class="mb-0">Aşağıdaki formu doldurarak yeni randevu oluşturabilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <form method="post" action="/Randevu/Create">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Hasta ID</label>
+                <input type="number" name="HastaId" class="form-control" placeholder="Hasta ID girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Psikolog ID</label>
+                <input type="number" name="PsikologId" class="form-control" placeholder="Psikolog ID girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Tarih</label>
+                <input type="date" name="Tarih" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Saat</label>
+                <input type="time" name="Saat" class="form-control" />
+            </div>
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Kaydet</button>
+                <a href="/Randevu" class="btn btn-outline-secondary ms-2">Geri Dön</a>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,12 +1,32 @@
 ﻿@model PsikologRandevu.Models.GorusmeNotu
+@{
+    ViewData["Title"] = "Yeni Görüşme Notu";
+}
 
-<h2>Yeni Görüşme Notu Ekle</h2>
-<form method="post" action="/GorusmeNotu/Create">
-    <label>Randevu ID:</label>
-    <input type="number" name="RandevuId" /><br />
-    <label>Psikolog ID:</label>
-    <input type="number" name="PsikologId" /><br />
-    <label>Not:</label>
-    <textarea name="Not"></textarea><br />
-    <button type="submit">Kaydet</button>
-</form>
+<div class="page-header">
+    <h2><i class="fas fa-notes-medical me-2"></i>Yeni Görüşme Notu Ekle</h2>
+    <p class="mb-0">Aşağıdaki formu doldurarak yeni görüşme notu ekleyebilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <form method="post" action="/GorusmeNotu/Create">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Randevu ID</label>
+                <input type="number" name="RandevuId" class="form-control" placeholder="Randevu ID girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Psikolog ID</label>
+                <input type="number" name="PsikologId" class="form-control" placeholder="Psikolog ID girin" />
+            </div>
+            <div class="col-12">
+                <label class="form-label">Not</label>
+                <textarea name="Not" class="form-control" rows="5" placeholder="Görüşme notunu girin"></textarea>
+            </div>
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Kaydet</button>
+                <a href="/GorusmeNotu" class="btn btn-outline-secondary ms-2">Geri Dön</a>
+            </div>
+        </div>
+    </form>
+</div>

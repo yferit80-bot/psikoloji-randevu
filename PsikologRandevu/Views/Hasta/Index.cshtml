@@ -1,19 +1,39 @@
 ﻿@model IEnumerable<PsikologRandevu.Models.Hasta>
+@{
+    ViewData["Title"] = "Hastalar";
+}
 
-<h2>Hastalar</h2>
-<a href="/Hasta/Create">Yeni Hasta Ekle</a>
-<table border="1">
-    <tr>
-        <th>Telefon</th>
-        <th>Doğum Tarihi</th>
-        <th>İşlem</th>
-    </tr>
-    @foreach (var hasta in Model)
-    {
-        <tr>
-            <td>@hasta.Telefon</td>
-            <td>@hasta.DogumTarihi.ToShortDateString()</td>
-            <td><a href="/Hasta/Delete/@hasta.Id">Sil</a></td>
-        </tr>
-    }
-</table>
+<div class="page-header">
+    <h2><i class="fas fa-heart me-2"></i>Hastalar</h2>
+    <p class="mb-0">Sistemdeki tüm hastaları buradan yönetebilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Hasta Listesi</h5>
+        <a href="/Hasta/Create" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Yeni Hasta</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Telefon</th>
+                <th>Doğum Tarihi</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hasta in Model)
+            {
+                <tr>
+                    <td><i class="fas fa-phone me-2 text-muted"></i>@hasta.Telefon</td>
+                    <td><i class="fas fa-birthday-cake me-2 text-muted"></i>@hasta.DogumTarihi.ToShortDateString()</td>
+                    <td>
+                        <a href="/Hasta/Delete/@hasta.Id" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

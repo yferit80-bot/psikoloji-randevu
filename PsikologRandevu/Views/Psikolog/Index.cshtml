@@ -1,21 +1,41 @@
 ﻿@model IEnumerable<PsikologRandevu.Models.Psikolog>
+@{
+    ViewData["Title"] = "Psikologlar";
+}
 
-<h2>Psikologlar</h2>
-<a href="/Psikolog/Create">Yeni Psikolog Ekle</a>
-<table border="1">
-    <tr>
-        <th>Uzmanlık</th>
-        <th>Biyografi</th>
-        <th>Seans Ücreti</th>
-        <th>İşlem</th>
-    </tr>
-    @foreach (var psikolog in Model)
-    {
-        <tr>
-            <td>@psikolog.Uzmanlik</td>
-            <td>@psikolog.Biyografi</td>
-            <td>@psikolog.SeansUcreti</td>
-            <td><a href="/Psikolog/Delete/@psikolog.Id">Sil</a></td>
-        </tr>
-    }
-</table>
+<div class="page-header">
+    <h2><i class="fas fa-user-md me-2"></i>Psikologlar</h2>
+    <p class="mb-0">Sistemdeki tüm psikologları buradan yönetebilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Psikolog Listesi</h5>
+        <a href="/Psikolog/Create" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Yeni Psikolog</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Uzmanlık</th>
+                <th>Biyografi</th>
+                <th>Seans Ücreti</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var psikolog in Model)
+            {
+                <tr>
+                    <td><span class="badge bg-success">@psikolog.Uzmanlik</span></td>
+                    <td>@psikolog.Biyografi</td>
+                    <td>@psikolog.SeansUcreti ₺</td>
+                    <td>
+                        <a href="/Psikolog/Delete/@psikolog.Id" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

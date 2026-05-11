@@ -1,20 +1,44 @@
 ﻿@model PsikologRandevu.Models.Kullanici
+@{
+    ViewData["Title"] = "Yeni Kullanıcı";
+}
 
-<h2>Yeni Kullanıcı Ekle</h2>
-<form method="post" action="/Kullanici/Create">
-    <label>Ad:</label>
-    <input type="text" name="Ad" /><br />
-    <label>Soyad:</label>
-    <input type="text" name="Soyad" /><br />
-    <label>Email:</label>
-    <input type="email" name="Email" /><br />
-    <label>Şifre:</label>
-    <input type="password" name="Sifre" /><br />
-    <label>Rol:</label>
-    <select name="Rol">
-        <option>Hasta</option>
-        <option>Psikolog</option>
-        <option>Admin</option>
-    </select><br />
-    <button type="submit">Kaydet</button>
-</form>
+<div class="page-header">
+    <h2><i class="fas fa-user-plus me-2"></i>Yeni Kullanıcı Ekle</h2>
+    <p class="mb-0">Aşağıdaki formu doldurarak yeni kullanıcı ekleyebilirsiniz.</p>
+</div>
+
+<div class="card p-4">
+    <form method="post" action="/Kullanici/Create">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Ad</label>
+                <input type="text" name="Ad" class="form-control" placeholder="Adı girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Soyad</label>
+                <input type="text" name="Soyad" class="form-control" placeholder="Soyadı girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" name="Email" class="form-control" placeholder="Email girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Şifre</label>
+                <input type="password" name="Sifre" class="form-control" placeholder="Şifre girin" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Rol</label>
+                <select name="Rol" class="form-select">
+                    <option>Hasta</option>
+                    <option>Psikolog</option>
+                    <option>Admin</option>
+                </select>
+            </div>
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Kaydet</button>
+                <a href="/Kullanici" class="btn btn-outline-secondary ms-2">Geri Dön</a>
+            </div>
+        </div>
+    </form>
+</div>
