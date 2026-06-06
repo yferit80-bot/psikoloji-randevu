@@ -24,7 +24,7 @@ namespace PsikologRandevu.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(GorusmeNotu gorusmeNotu)
+        public IActionResult Create(GorusmeNotlari gorusmeNotu)
         {
             gorusmeNotu.Tarih = DateTime.Now;
             _context.GorusmeNotlari.Add(gorusmeNotu);
@@ -35,8 +35,11 @@ namespace PsikologRandevu.Controllers
         public IActionResult Delete(int id)
         {
             var not = _context.GorusmeNotlari.Find(id);
-            _context.GorusmeNotlari.Remove(not);
-            _context.SaveChanges();
+            if (not != null)
+            {
+                _context.GorusmeNotlari.Remove(not);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PsikologRandevu.Models;
 
 namespace PsikologRandevu.Controllers
@@ -14,19 +16,32 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Index()
         {
-            var hastalar = _context.Hastalar.ToList();
+            var hastalar = _context.Hastalar
+                .Include(h => h.Kullanici)
+                .ToList();
             return View(hastalar);
         }
 
         public IActionResult Create()
         {
+            var psikologlar = _context.Psikologlar
+                .Include(p => p.Kullanici)
+                .Select(p => new {
+                    p.Id,
+                    AdSoyad = p.Kullanici.Ad + " " + p.Kullanici.Soyad
+                }).ToList();
+
+            ViewBag.PsikologId = new SelectList(psikologlar, "Id", "AdSoyad");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Hasta hasta)
+        public IActionResult Create(Randevular randevu)
         {
-            _context.Hastalar.Add(hasta);
+            var hastaId = HttpContext.Session.GetInt32("HastaId");
+            randevu.HastaId = hastaId ?? 0;
+            randevu.Durum = "Bekliyor";
+            _context.Randevular.Add(randevu);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -34,8 +49,11 @@ namespace PsikologRandevu.Controllers
         public IActionResult Delete(int id)
         {
             var hasta = _context.Hastalar.Find(id);
-            _context.Hastalar.Remove(hasta);
-            _context.SaveChanges();
+            if (hasta != null)
+            {
+                _context.Hastalar.Remove(hasta);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

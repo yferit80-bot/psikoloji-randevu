@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PsikologRandevu.Models;
 
 namespace PsikologRandevu.Controllers
@@ -14,18 +16,50 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Index()
         {
-            var randevular = _context.Randevular.ToList();
-            return View(randevular);
+            var rol = HttpContext.Session.GetString("Rol");
+
+            if (rol == "Hasta")
+            {
+                var hastaId = HttpContext.Session.GetInt32("HastaId");
+                var randevular = _context.Randevular
+                    .Include(r => r.Hasta).ThenInclude(h => h.Kullanici)
+                    .Include(r => r.Psikolog).ThenInclude(p => p.Kullanici)
+                    .Where(r => r.HastaId == hastaId)
+                    .ToList();
+                return View(randevular);
+            }
+            else if (rol == "Doktor")
+            {
+                var psikologId = HttpContext.Session.GetInt32("PsikologId");
+                var randevular = _context.Randevular
+                    .Include(r => r.Hasta).ThenInclude(h => h.Kullanici)
+                    .Include(r => r.Psikolog).ThenInclude(p => p.Kullanici)
+                    .Where(r => r.PsikologId == psikologId)
+                    .ToList();
+                return View(randevular);
+            }
+
+            return RedirectToAction("Index", "Giris");
         }
 
         public IActionResult Create()
         {
+            var psikologlar = _context.Psikologlar
+                .Include(p => p.Kullanici)
+                .Select(p => new {
+                    p.Id,
+                    AdSoyad = p.Kullanici.Ad + " " + p.Kullanici.Soyad
+                }).ToList();
+
+            ViewBag.PsikologId = new SelectList(psikologlar, "Id", "AdSoyad");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Randevu randevu)
+        public IActionResult Create(Randevular randevu)
         {
+            var hastaId = HttpContext.Session.GetInt32("HastaId");
+            randevu.HastaId = hastaId ?? 0;
             randevu.Durum = "Bekliyor";
             _context.Randevular.Add(randevu);
             _context.SaveChanges();
@@ -35,24 +69,33 @@ namespace PsikologRandevu.Controllers
         public IActionResult Onayla(int id)
         {
             var randevu = _context.Randevular.Find(id);
-            randevu.Durum = "Onaylandi";
-            _context.SaveChanges();
+            if (randevu != null)
+            {
+                randevu.Durum = "Onaylandi";
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
         public IActionResult Iptal(int id)
         {
             var randevu = _context.Randevular.Find(id);
-            randevu.Durum = "Iptal";
-            _context.SaveChanges();
+            if (randevu != null)
+            {
+                randevu.Durum = "Iptal";
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
             var randevu = _context.Randevular.Find(id);
-            _context.Randevular.Remove(randevu);
-            _context.SaveChanges();
+            if (randevu != null)
+            {
+                _context.Randevular.Remove(randevu);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

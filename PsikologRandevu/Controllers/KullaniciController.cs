@@ -24,7 +24,7 @@ namespace PsikologRandevu.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Kullanici kullanici)
+        public IActionResult Create(Kullanicilar kullanici)
         {
             _context.Kullanicilar.Add(kullanici);
             _context.SaveChanges();
@@ -34,8 +34,11 @@ namespace PsikologRandevu.Controllers
         public IActionResult Delete(int id)
         {
             var kullanici = _context.Kullanicilar.Find(id);
-            _context.Kullanicilar.Remove(kullanici);
-            _context.SaveChanges();
+            if (kullanici != null)
+            {
+                _context.Kullanicilar.Remove(kullanici);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

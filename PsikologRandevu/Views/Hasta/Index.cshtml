@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PsikologRandevu.Models.Hasta>
+﻿@model IEnumerable<PsikologRandevu.Models.Hastalar>
 @{
     ViewData["Title"] = "Hastalar";
 }
@@ -16,6 +16,8 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th>Ad Soyad</th>
+                <th>Email</th>
                 <th>Telefon</th>
                 <th>Doğum Tarihi</th>
                 <th>İşlem</th>
@@ -25,6 +27,8 @@
             @foreach (var hasta in Model)
             {
                 <tr>
+                    <td><strong>@hasta.Kullanici?.Ad @hasta.Kullanici?.Soyad</strong></td>
+                    <td><i class="fas fa-envelope me-2 text-muted"></i>@hasta.Kullanici?.Email</td>
                     <td><i class="fas fa-phone me-2 text-muted"></i>@hasta.Telefon</td>
                     <td><i class="fas fa-birthday-cake me-2 text-muted"></i>@hasta.DogumTarihi.ToShortDateString()</td>
                     <td>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PsikologRandevu.Models.Psikolog>
+﻿@model IEnumerable<PsikologRandevu.Models.Psikologlar>
 @{
     ViewData["Title"] = "Psikologlar";
 }
@@ -16,6 +16,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th>Ad Soyad</th>
                 <th>Uzmanlık</th>
                 <th>Biyografi</th>
                 <th>Seans Ücreti</th>
@@ -26,6 +27,7 @@
             @foreach (var psikolog in Model)
             {
                 <tr>
+                    <td><strong>@psikolog.Kullanici?.Ad @psikolog.Kullanici?.Soyad</strong></td>
                     <td><span class="badge bg-success">@psikolog.Uzmanlik</span></td>
                     <td>@psikolog.Biyografi</td>
                     <td>@psikolog.SeansUcreti ₺</td>

@@ -10,7 +10,6 @@
         * { font-family: 'Segoe UI', sans-serif; }
         body { background-color: #f4f6fb; }
 
-        /* NAVBAR */
         .navbar {
             background: #ffffff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
@@ -33,7 +32,6 @@
             color: #3a7bd5 !important;
         }
 
-        /* PAGE HEADER */
         .page-header {
             background: linear-gradient(135deg, #3a7bd5, #6ea8fe);
             color: white;
@@ -43,14 +41,12 @@
         }
         .page-header p { opacity: 0.85; }
 
-        /* CARDS */
         .card {
             border: none;
             border-radius: 16px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.07);
         }
 
-        /* STAT CARDS */
         .stat-card {
             border-radius: 16px;
             padding: 24px;
@@ -64,22 +60,18 @@
         .stat-card i { font-size: 2.5rem; opacity: 0.8; }
         .stat-card h3 { font-size: 2rem; font-weight: 700; }
 
-        /* TABLE */
         .table thead tr { background: linear-gradient(135deg, #3a7bd5, #6ea8fe); color: white; }
         .table thead th { border: none; padding: 14px; }
         .table tbody tr:hover { background: #f0f4ff; }
 
-        /* BUTTONS */
         .btn-primary { background: linear-gradient(135deg, #3a7bd5, #6ea8fe); border: none; border-radius: 8px; }
         .btn-primary:hover { opacity: 0.9; }
         .btn-danger { border-radius: 8px; }
 
-        /* FORM */
         .form-control, .form-select { border-radius: 8px; border: 1px solid #dde3f0; padding: 10px 14px; }
         .form-control:focus, .form-select:focus { border-color: #3a7bd5; box-shadow: 0 0 0 3px rgba(58,123,213,0.15); }
         .form-label { font-weight: 500; color: #444; }
 
-        /* BADGE */
         .badge { border-radius: 6px; padding: 5px 10px; }
     </style>
 </head>
@@ -92,21 +84,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-    @if (Context.Session.GetString("Rol") == "Hasta")
-    {
-        <li class="nav-item"><a class="nav-link" href="/Psikolog"><i class="fas fa-user-md me-1"></i>Psikologlar</a></li>
-        <li class="nav-item"><a class="nav-link" href="/Randevu/Create"><i class="fas fa-calendar-plus me-1"></i>Randevu Al</a></li>
-        <li class="nav-item"><a class="nav-link" href="/GorusmeNotu/Create"><i class="fas fa-notes-medical me-1"></i>Not Ekle</a></li>
-    }
-    else if (Context.Session.GetString("Rol") == "Doktor")
-    {
-        <li class="nav-item"><a class="nav-link" href="/Hasta"><i class="fas fa-users me-1"></i>Hastalar</a></li>
-        <li class="nav-item"><a class="nav-link" href="/Hasta/Create"><i class="fas fa-user-plus me-1"></i>Hasta Ekle</a></li>
-        <li class="nav-item"><a class="nav-link" href="/GorusmeNotu"><i class="fas fa-notes-medical me-1"></i>Görüşme Notları</a></li>
-        <li class="nav-item"><a class="nav-link" href="/Kullanici"><i class="fas fa-users me-1"></i>Kullanıcılar</a></li>
-    }
-    <li class="nav-item"><a class="nav-link text-danger" href="/Giris/Cikis"><i class="fas fa-sign-out-alt me-1"></i>Çıkış</a></li>
-</ul>
+                    @if (Context.Session.GetString("Rol") == "Hasta")
+                    {
+                        <li class="nav-item"><a class="nav-link" href="/Psikolog"><i class="fas fa-user-md me-1"></i>Psikologlar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Randevu"><i class="fas fa-calendar-alt me-1"></i>Randevularım</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Randevu/Create"><i class="fas fa-calendar-plus me-1"></i>Randevu Al</a></li>
+                    }
+                    else if (Context.Session.GetString("Rol") == "Doktor")
+                    {
+                        <li class="nav-item"><a class="nav-link" href="/Randevu"><i class="fas fa-calendar-alt me-1"></i>Randevularım</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Hasta"><i class="fas fa-users me-1"></i>Hastalar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/GorusmeNotu"><i class="fas fa-notes-medical me-1"></i>Görüşme Notları</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Kullanici"><i class="fas fa-users me-1"></i>Kullanıcılar</a></li>
+                    }
+                    <li class="nav-item"><a class="nav-link text-danger" href="/Giris/Cikis"><i class="fas fa-sign-out-alt me-1"></i>Çıkış</a></li>
+                </ul>
             </div>
         </div>
     </nav>

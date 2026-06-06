@@ -1,21 +1,35 @@
-﻿@model IEnumerable<PsikologRandevu.Models.Randevu>
+﻿@model IEnumerable<PsikologRandevu.Models.Randevular>
 @{
     ViewData["Title"] = "Randevular";
+    var rol = Context.Session.GetString("Rol");
 }
 
 <div class="page-header">
-    <h2><i class="fas fa-calendar-alt me-2"></i>Randevular</h2>
-    <p class="mb-0">Sistemdeki tüm randevuları buradan yönetebilirsiniz.</p>
+    <h2><i class="fas fa-calendar-alt me-2"></i>Randevularım</h2>
+    <p class="mb-0">Randevularınızı buradan görüntüleyebilirsiniz.</p>
 </div>
 
 <div class="card p-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="mb-0">Randevu Listesi</h5>
-        <a href="/Randevu/Create" class="btn btn-primary"><i class="fas fa-plus me-1"></i>Yeni Randevu</a>
+        @if (rol == "Hasta")
+        {
+            <a href="/Randevu/Create" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>Yeni Randevu
+            </a>
+        }
     </div>
     <table class="table table-hover">
         <thead>
             <tr>
+                @if (rol == "Hasta")
+                {
+                    <th>Psikolog</th>
+                }
+                else
+                {
+                    <th>Hasta</th>
+                }
                 <th>Tarih</th>
                 <th>Saat</th>
                 <th>Durum</th>
@@ -26,6 +40,14 @@
             @foreach (var randevu in Model)
             {
                 <tr>
+                    @if (rol == "Hasta")
+                    {
+                        <td><strong>@randevu.Psikolog?.Kullanici?.Ad @randevu.Psikolog?.Kullanici?.Soyad</strong></td>
+                    }
+                    else
+                    {
+                        <td><strong>@randevu.Hasta?.Kullanici?.Ad @randevu.Hasta?.Kullanici?.Soyad</strong></td>
+                    }
                     <td><i class="fas fa-calendar me-2 text-muted"></i>@randevu.Tarih.ToShortDateString()</td>
                     <td><i class="fas fa-clock me-2 text-muted"></i>@randevu.Saat</td>
                     <td>
@@ -43,9 +65,18 @@
                         }
                     </td>
                     <td>
-                        <a href="/Randevu/Onayla/@randevu.Id" class="btn btn-sm btn-success"><i class="fas fa-check"></i></a>
-                        <a href="/Randevu/Iptal/@randevu.Id" class="btn btn-sm btn-warning"><i class="fas fa-times"></i></a>
-                        <a href="/Randevu/Delete/@randevu.Id" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        @if (rol == "Doktor")
+                        {
+                            <a href="/Randevu/Onayla/@randevu.Id" class="btn btn-sm btn-success">
+                                <i class="fas fa-check"></i>
+                            </a>
+                            <a href="/Randevu/Iptal/@randevu.Id" class="btn btn-sm btn-warning">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
+                        <a href="/Randevu/Delete/@randevu.Id" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
                     </td>
                 </tr>
             }

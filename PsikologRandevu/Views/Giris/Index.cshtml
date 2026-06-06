@@ -29,24 +29,58 @@
         }
         .giris-btn {
             border-radius: 12px;
-            padding: 20px;
+            padding: 15px;
             font-size: 1.1rem;
             font-weight: 600;
             border: none;
             width: 100%;
             transition: all 0.3s;
+            display: block;
+            text-decoration: none;
+            text-align: center;
         }
         .btn-hasta {
             background: linear-gradient(135deg, #3a7bd5, #6ea8fe);
             color: white;
         }
-        .btn-hasta:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-hasta:hover { opacity: 0.9; transform: translateY(-2px); color: white; }
         .btn-doktor {
             background: linear-gradient(135deg, #0f9b8e, #43c6ac);
             color: white;
         }
-        .btn-doktor:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-doktor:hover { opacity: 0.9; transform: translateY(-2px); color: white; }
+        .btn-kayit-hasta {
+            background: white;
+            color: #3a7bd5;
+            border: 2px solid #3a7bd5 !important;
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            width: 100%;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .btn-kayit-hasta:hover { background: #f0f4ff; color: #3a7bd5; }
+        .btn-kayit-doktor {
+            background: white;
+            color: #0f9b8e;
+            border: 2px solid #0f9b8e !important;
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            width: 100%;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .btn-kayit-doktor:hover { background: #f0fffe; color: #0f9b8e; }
         .logo { color: #3a7bd5; font-size: 3rem; }
+        .ayrac { color: #ccc; font-size: 0.85rem; margin: 6px 0; }
     </style>
 </head>
 <body>
@@ -55,17 +89,24 @@
         <h2 class="fw-bold mb-1">Psikoloji Randevu</h2>
         <p class="text-muted mb-4">Lütfen giriş türünü seçin</p>
 
-        <div class="d-grid gap-3">
-            <form method="post" action="/Giris/HastaGiris">
-                <button type="submit" class="giris-btn btn-hasta">
-                    <i class="fas fa-heart me-2"></i>Hasta Girişi
-                </button>
-            </form>
-            <form method="post" action="/Giris/DoktorGiris">
-                <button type="submit" class="giris-btn btn-doktor">
-                    <i class="fas fa-user-md me-2"></i>Doktor Girişi
-                </button>
-            </form>
+        <div class="d-grid gap-2">
+            <a href="/Giris/HastaGiris" class="giris-btn btn-hasta">
+                <i class="fas fa-heart me-2"></i>Hasta Girişi
+            </a>
+            <p class="ayrac">Hesabın yok mu?</p>
+            <a href="/Kayit/HastaKayit" class="btn-kayit-hasta">
+                <i class="fas fa-user-plus me-2"></i>Hasta Olarak Kayıt Ol
+            </a>
+
+            <hr class="my-3" />
+
+            <a href="/Giris/DoktorGiris" class="giris-btn btn-doktor">
+                <i class="fas fa-user-md me-2"></i>Doktor Girişi
+            </a>
+            <p class="ayrac">Hesabın yok mu?</p>
+            <a href="/Kayit/PsikologKayit" class="btn-kayit-doktor">
+                <i class="fas fa-user-plus me-2"></i>Psikolog Olarak Kayıt Ol
+            </a>
         </div>
     </div>
 </body>

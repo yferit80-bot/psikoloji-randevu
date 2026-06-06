@@ -1,4 +1,4 @@
-﻿@model PsikologRandevu.Models.Randevu
+﻿@model PsikologRandevu.Models.Randevular
 @{
     ViewData["Title"] = "Yeni Randevu";
 }
@@ -12,12 +12,10 @@
     <form method="post" action="/Randevu/Create">
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Hasta ID</label>
-                <input type="number" name="HastaId" class="form-control" placeholder="Hasta ID girin" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Psikolog ID</label>
-                <input type="number" name="PsikologId" class="form-control" placeholder="Psikolog ID girin" />
+                <label class="form-label">Psikolog</label>
+                <select name="PsikologId" class="form-select" asp-items="ViewBag.PsikologId">
+                    <option value="">-- Psikolog Seçin --</option>
+                </select>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Tarih</label>
@@ -28,7 +26,9 @@
                 <input type="time" name="Saat" class="form-control" />
             </div>
             <div class="col-12 mt-3">
-                <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Kaydet</button>
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="fas fa-save me-2"></i>Kaydet
+                </button>
                 <a href="/Randevu" class="btn btn-outline-secondary ms-2">Geri Dön</a>
             </div>
         </div>
