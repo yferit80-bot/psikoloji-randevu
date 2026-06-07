@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.EntityFrameworkCore;
 using PsikologRandevu.Models;
 
@@ -16,6 +15,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Index()
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var psikologlar = _context.Psikologlar
                 .Include(p => p.Kullanici)
                 .ToList();
@@ -24,12 +27,20 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Create()
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Psikologlar psikolog)
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             _context.Psikologlar.Add(psikolog);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -37,6 +48,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Delete(int id)
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var psikolog = _context.Psikologlar.Find(id);
             if (psikolog != null)
             {

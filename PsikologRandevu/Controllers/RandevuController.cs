@@ -17,6 +17,8 @@ namespace PsikologRandevu.Controllers
         public IActionResult Index()
         {
             var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
 
             if (rol == "Hasta")
             {
@@ -44,6 +46,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Create()
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var psikologlar = _context.Psikologlar
                 .Include(p => p.Kullanici)
                 .Select(p => new {
@@ -68,6 +74,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Onayla(int id)
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var randevu = _context.Randevular.Find(id);
             if (randevu != null)
             {
@@ -79,6 +89,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Iptal(int id)
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var randevu = _context.Randevular.Find(id);
             if (randevu != null)
             {
@@ -90,6 +104,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Delete(int id)
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var randevu = _context.Randevular.Find(id);
             if (randevu != null)
             {

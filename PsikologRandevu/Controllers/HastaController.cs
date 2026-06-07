@@ -16,6 +16,12 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Index()
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+            if (rol != "Doktor")
+                return RedirectToAction("Index", "Home");
+
             var hastalar = _context.Hastalar
                 .Include(h => h.Kullanici)
                 .ToList();
@@ -24,6 +30,10 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Create()
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+
             var psikologlar = _context.Psikologlar
                 .Include(p => p.Kullanici)
                 .Select(p => new {
@@ -48,6 +58,12 @@ namespace PsikologRandevu.Controllers
 
         public IActionResult Delete(int id)
         {
+            var rol = HttpContext.Session.GetString("Rol");
+            if (rol == null)
+                return RedirectToAction("Index", "Giris");
+            if (rol != "Doktor")
+                return RedirectToAction("Index", "Home");
+
             var hasta = _context.Hastalar.Find(id);
             if (hasta != null)
             {
